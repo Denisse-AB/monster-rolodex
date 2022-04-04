@@ -1,10 +1,10 @@
-import React from 'react';
+import { Component } from 'react';
 import './App.css';
 import {CardList} from './components/card-list/card-list';
 import {SearchBox} from './components/search-box/search-box';
 
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -18,15 +18,21 @@ class App extends React.Component {
       .then(response => response.json())
       .then(json => this.setState({monsters: json}))
   }
+  // Performance: Move anonymous func out of the render.
+  onSearchChange = e => {
+    const searchField = e.target.value.toLowerCase();
 
-  handleChange = e => {
-    this.setState({ searchField: e.target.value })
+    this.setState(() => {
+      return { searchField }
+    })
   }
 
   render() {
-    const { monsters, searchField } = this.state
+    const { monsters, searchField } = this.state;
+    const { onSearchChange } = this;
+
     const filteredMonsters = monsters.filter(monster =>
-      monster.name.toLowerCase().includes(searchField.toLowerCase())
+      monster.name.toLowerCase().includes(searchField)
     );
 
     return (
@@ -34,7 +40,7 @@ class App extends React.Component {
         <h1> Monster Rolodex </h1>
         <SearchBox
           placeholder='Type Monster'
-          handleChange={this.handleChange}
+          handleChange={onSearchChange}
         />
         <CardList
           monsters={filteredMonsters}
