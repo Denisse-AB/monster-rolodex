@@ -1,8 +1,8 @@
 // The actual card
 import './card.css';
 
-export const Card = props => {
-  const { name, email, id } = props.monster;
+export const Card = ({ monster }) => {
+  const { name, email, id } = monster;
 
   return (
     <div className='card-container' key={id}>

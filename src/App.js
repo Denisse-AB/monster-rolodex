@@ -32,6 +32,7 @@ const App = () => {
     <div className='App'>
       <h1> Monster Rolodex </h1>
       <SearchBox
+        className='search'
         placeholder='Type Monster'
         handleChange={onSearchChange}
       />

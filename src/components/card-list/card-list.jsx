@@ -4,9 +4,10 @@ import {Card} from '../card/card';
 
 import './card-list.css';
 
-export const CardList = props => (
+// Implicit return
+export const CardList = ({ monsters }) => (
   <div className="card-list">
-    {props.monsters.map(monster => (
+    {monsters.map(monster => (
       <Card key={monster.id} monster={monster}/>))
     }
   </div>
